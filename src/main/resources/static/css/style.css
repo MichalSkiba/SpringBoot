@@ -1,0 +1,134 @@
+body {
+    font-family: sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    color: #000000;
+    background-color: #ffffff;
+    margin-left: auto;
+    margin-right : auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 1300px;
+}
+
+input {
+    height: 20px;
+    border: 1px solid gray;
+    border-radius: 2px;
+}
+
+form {
+    font-family: sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+h2 {
+    color: #596f95;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.error{
+    color: red;
+}
+
+
+.formButton2 {
+    background-color: white;
+    border: 1px solid black;
+    color: #005984;
+    padding: 10px 10px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: bold;
+    width: 160px;
+    height: 40px;
+}
+
+.formButton2:hover {
+    border: 1px solid #3778c8;
+    background-color: #3778c8;
+    color: white;
+}
+
+.formButton {
+    background-color: white;
+    border: 1px solid black;
+    color: #005984;
+    padding: 10px 10px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: bold;
+    width: 160px;
+    height: 40px;
+}
+
+.formButton:hover {
+    border: 1px solid red;
+}
+
+.tableMenuBg {
+    background-color: #333a56;
+    border-radius: 6px;
+}
+
+.tableMenuLink {
+    font-size: 18px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #f0f0e6;
+    text-decoration: none;
+}
+
+.tableMenuLink:hover {
+    font-size: 18px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #E8E8E8;
+    text-decoration: underline;
+}
+
+.tdUsersHead {
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #f0f0e6;
+    text-decoration: none;
+    background-color: #52658F;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.tableUsers {
+    border: 1px solid #52658F;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: rpx;
+}
+
+.tdUsers {
+    border: 1px solid #52658F;
+}
+
+.header {
+    font-size: 36px;
+    color: #52658F;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.pageMenuLink {
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #0080c0;
+    text-decoration: none;
+}
