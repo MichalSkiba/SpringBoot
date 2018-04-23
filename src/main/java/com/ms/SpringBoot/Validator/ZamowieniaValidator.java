@@ -21,7 +21,6 @@ public class ZamowieniaValidator implements Validator {
 
         ValidationUtils.rejectIfEmpty(errors,"nrZamowienia", "error.zamowienia.polePuste");
         ValidationUtils.rejectIfEmpty(errors, "dataZamowienia", "error.zamowienia.polePuste");
-//		ValidationUtils.rejectIfEmpty(errors, "dataPrzyjecia", "error.zamowienia.polePuste");
         ValidationUtils.rejectIfEmpty(errors, "kompletne", "error.zamowienia.polePuste");
 
         if (zamowienia.getIloscZamowiona() <= 0) {
