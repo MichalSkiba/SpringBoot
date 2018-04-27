@@ -16,7 +16,7 @@
 		   align="center">
 		<tr>
 			<td align="right" width="140">Login:</td>
-			<td align="left"><input type="text" name="email" id="email"
+			<td align="left"><input type="text" name="login" id="login"
 									size="30" /></td>
 		</tr>
 		<tr>
@@ -35,7 +35,7 @@
 </form>
 <p id="msg1" align="center" class="error">
 	<c:if test="${not empty param.error}">
-		Nieprawidłowy email lub hasło
+		Nieprawidłowy login lub hasło
 	</c:if>
 </p>
 

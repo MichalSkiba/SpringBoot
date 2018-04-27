@@ -32,10 +32,10 @@ public class ControllerRegister {
     public String registerUserAction(@Valid User user, BindingResult result, Model model) {
         String returnPage = null;
 
-        User userExists = userService.findUserByEmail(user.getEmail());
+        User userExists = userService.findUserByLogin(user.getLogin());
         if (userExists != null) {
-            result.rejectValue("email", "error.user",
-                    "Podany adres email jest już zarejestrowany w bazie");
+            result.rejectValue("login", "error.user",
+                    "Podany login jest już zarejestrowany w bazie");
         }
         if (result.hasErrors()) {
             returnPage = "register";
