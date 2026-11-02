@@ -1,6 +1,6 @@
 package com.ms.SpringBoot.Model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "role")

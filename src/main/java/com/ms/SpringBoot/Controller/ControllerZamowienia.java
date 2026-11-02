@@ -40,7 +40,7 @@ public class ControllerZamowienia {
     @Secured(value = { "ROLE_ADMIN", "ROLE_SALE" })
     public String showZamowieniaPageable(@PathVariable("page") int page, Model model) {
         int elements = 5;
-        Page<Zamowienia> pages = zamowieniaService.findAllPages(new PageRequest(page, elements));
+        Page<Zamowienia> pages = zamowieniaService.findAllPages(PageRequest.of(page, elements));
         int totalPages = pages.getTotalPages();
         int currentPage = pages.getNumber();
         List<Zamowienia> zamowieniaList = pages.getContent();
@@ -79,7 +79,7 @@ public class ControllerZamowienia {
             zamowieniaService.saveZamowienia(zamowienia);
             int elements = 5;
             int page = 0;
-            Page<Zamowienia> pages = zamowieniaService.findAllPages(new PageRequest(page, elements));
+            Page<Zamowienia> pages = zamowieniaService.findAllPages(PageRequest.of(page, elements));
             int totalPages = pages.getTotalPages();
             int currentPage = pages.getNumber();
             List<Zamowienia> zamowieniaList = pages.getContent();

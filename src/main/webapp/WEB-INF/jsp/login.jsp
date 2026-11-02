@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<form id="loginForm" action="/login" method="POST">
+<form id="loginForm" action="/login" method="POST">\n<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
 	<table width="500" border="0" cellpadding="4" cellspacing="1"
 		   align="center">
