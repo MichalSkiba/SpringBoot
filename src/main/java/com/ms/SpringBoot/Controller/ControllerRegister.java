@@ -8,10 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.validation.Valid;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 
 @Controller
 public class ControllerRegister {
@@ -19,16 +19,14 @@ public class ControllerRegister {
     @Autowired
     private UserService userService;
 
-    @GET
-    @RequestMapping(value = "/register")
+    @GetMapping(value = "/register")
     public String showRegisterForm(Model model) {
         User user = new User();
         model.addAttribute("user", user);
         return "register";
     }
 
-    @POST
-    @RequestMapping(value = "/adduser")
+    @PostMapping(value = "/adduser")
     public String registerUserAction(@Valid User user, BindingResult result, Model model) {
         String returnPage = null;
 

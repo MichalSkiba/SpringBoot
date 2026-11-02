@@ -13,9 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import java.util.List;
 
 @Controller
@@ -24,8 +24,7 @@ public class ControllerZamowienia {
     @Autowired
     ZamowieniaService zamowieniaService;
 
-    @GET
-    @RequestMapping(value = "/zamowienia")
+    @GetMapping(value = "/zamowienia")
     @Secured(value = {"ROLE_ADMIN", "ROLE_SALE"})
     public String pokazZamowienia(Model model) {
 
@@ -35,8 +34,7 @@ public class ControllerZamowienia {
         return "zamowienia";
     }
 
-    @GET
-    @RequestMapping(value = "/zamowienia/{page}")
+    @GetMapping(value = "/zamowienia/{page}")
     @Secured(value = { "ROLE_ADMIN", "ROLE_SALE" })
     public String showZamowieniaPageable(@PathVariable("page") int page, Model model) {
         int elements = 5;
@@ -50,8 +48,7 @@ public class ControllerZamowienia {
         return "zamowienia";
     }
 
-    @GET
-    @RequestMapping("/nowezam")
+    @GetMapping("/nowezam")
     @Secured(value = {"ROLE_ADMIN", "ROLE_SALE"})
     public String noweZamowienie(Model model) {
         Zamowienia zamowienia = new Zamowienia();
@@ -63,8 +60,7 @@ public class ControllerZamowienia {
         return "nowezam";
     }
 
-    @POST
-    @RequestMapping("/addzam")
+    @PostMapping("/addzam")
     @Secured(value = {"ROLE_ADMIN", "ROLE_SALE"})
     public String dodajZamowienie(Model model, Zamowienia zamowienia, BindingResult result) {
 
