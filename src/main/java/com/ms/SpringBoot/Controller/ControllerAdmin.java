@@ -9,10 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.Valid;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
+import jakarta.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,15 +23,13 @@ public class ControllerAdmin {
     @Autowired
     private UserService userService;
 
-    @GET
-    @RequestMapping("/admin/main")
+    @GetMapping("/admin/main")
     @Secured("ROLE_ADMIN")
     public String pokazStrone() {
         return "admin/admin";
     }
 
-    @GET
-    @RequestMapping(value = "/admin/users")
+    @GetMapping(value = "/admin/users")
     @Secured(value = { "ROLE_ADMIN" })
     public String getAllUsers(Model model) {
 
@@ -42,8 +40,7 @@ public class ControllerAdmin {
         return "admin/users";
     }
 
-    @GET
-    @RequestMapping(value = "/admin/edit/{id}")
+    @GetMapping(value = "/admin/edit/{id}")
     @Secured(value = { "ROLE_ADMIN" })
     public String getUserToEdit(@PathVariable("id") String id, Model model) {
 
@@ -64,8 +61,7 @@ public class ControllerAdmin {
         return "admin/useredit";
     }
 
-    @POST
-    @RequestMapping(value = "/admin/update")
+    @PostMapping(value = "/admin/update")
     @Secured(value = "ROLE_ADMIN")
     public String updateUser(Model model, @Valid User user, BindingResult result) {
 

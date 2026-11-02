@@ -1,60 +1,46 @@
 package com.ms.SpringBoot.Config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
 import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
-public class SeciurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private BCryptPasswordEncoder bcp;
-
-    @Autowired
-    private DataSource ds;
-
-    @Value("${spring.queries.users-query}")
-    private String usersquery;
-
-    @Value("${spring.queries.roles-query}")
-    private String rolesQuery;
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.jdbcAuthentication().usersByUsernameQuery(usersquery)
-                .authoritiesByUsernameQuery(rolesQuery).dataSource(ds).passwordEncoder(bcp);
+@EnableMethodSecurity(securedEnabled = true)
+public class SeciurityConfig {
+    @Bean
+    UserDetailsService users(DataSource dataSource,
+            @Value("${spring.queries.users-query}") String usersQuery,
+            @Value("${spring.queries.roles-query}") String rolesQuery) {
+        JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource);
+        users.setUsersByUsernameQuery(usersQuery);
+        users.setAuthoritiesByUsernameQuery(rolesQuery);
+        return users;
     }
 
-    @Override
-    protected void configure (HttpSecurity htS) throws Exception {
-        htS.authorizeRequests().antMatchers("/").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/register").permitAll()
-                .antMatchers("/adduser").permitAll()
-                .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                .anyRequest().authenticated().and().csrf().disable()
-                .formLogin().loginPage("/login").failureUrl("/login?error=true")
-                .defaultSuccessUrl("/").usernameParameter("login").passwordParameter("password")
-                .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/").and().exceptionHandling().accessDeniedPage("/denied");
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/", "/login", "/register", "/adduser", "/resources/**", "/webjars/**").permitAll()
+                .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                .anyRequest().authenticated())
+            .formLogin(form -> form
+                .loginPage("/login").failureUrl("/login?error=true")
+                .defaultSuccessUrl("/").usernameParameter("login").passwordParameter("password"))
+            .logout(logout -> logout.logoutSuccessUrl("/"))
+            .exceptionHandling(errors -> errors.accessDeniedPage("/denied"))
+            .build();
     }
 
-    @Override
-    public void configure(WebSecurity wSec) throws Exception {
-        wSec.ignoring().antMatchers("/resources/**", "/static/**", "/static/css/**", "/js/**", "/img/**");
+    @Bean
+    BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
-
 }

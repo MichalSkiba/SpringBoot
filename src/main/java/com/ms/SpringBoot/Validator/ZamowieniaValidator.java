@@ -2,7 +2,6 @@ package com.ms.SpringBoot.Validator;
 
 import com.ms.SpringBoot.Model.Zamowienia;
 import com.ms.SpringBoot.utils.SpringUtils;
-import org.glassfish.hk2.utilities.general.ValidatorUtilities;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;

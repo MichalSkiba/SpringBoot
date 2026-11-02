@@ -21,7 +21,7 @@
             <img src="${pageContext.request.contextPath}/resources/img/meeting.jpg">&nbsp;
         </div>
         <form id="usersForm" action="adduser" modelAttribute="user"
-              enctype="multipart/form-data" method="POST">
+              enctype="multipart/form-data" method="POST">\n<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <h2 class="text-center"><strong>Create</strong> an account.</h2>
             <div class="form-group"><input class="form-control" type="login" name="login" placeholder="Login"></div>
             <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"></div>
